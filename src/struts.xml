@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<package name="util" extends="struts-default">
+		<action name="vaLIdationCodeAction.png" class="clf.dangdang.util.VaLIdationCodeAction"></action>
+	</package>
+	<package name="user" extends="struts-default" namespace="/user">
+		<action name="user_*" class="clf.dangdang.action.UserMagAction"
+			method="{1}">
+			<result name="loginOk">/main/main.jsp</result>
+			<result name="addressOk">/order/3miao.jsp</result>
+			<result name="registerOk">/user/verify_form.jsp</result>
+			<result name="activeEmailCodeOk">/user/register_ok.jsp</result>
+			<result name="activeEmailCodeErro">/user/verify_form.jsp</result>
+			<result name="loginErro">/user/login_form.jsp</result>
+			<result name="logoutOk">/main/main.jsp</result>
+		</action>
+     </package>
+     <package name="type" extends="struts-default" namespace="/type">
+        <action name="type_*" class="clf.dangdang.action.ProductTypeAction" method="{1}">
+            <result name="findAllOk">/main/category.jsp</result>
+            <result name="findByIdOk">/main/book_list.jsp</result>
+        </action>
+     </package>
+     <package name="book" extends="struts-default" namespace="/book">
+        <action name="book_*" class="clf.dangdang.action.BookMagAction" method="{1}">
+          <result name="findBookByStatusOk">/main/recommend.jsp</result>
+          <result name="findBookByMountsOk">/main/hot.jsp</result>
+          <result name="findBookByPutAwayOk">/main/new.jsp</result>
+          <result name="findBookByPutAwayAndMountsOk">/main/hotBoard.jsp</result>
+          <result name="findBookByIdOk">/main/book.jsp</result>
+        </action>
+     </package>
+     
+     <package name="cart" extends="struts-default" namespace="/cart">
+       <action name="cart_*" class="clf.dangdang.action.CartMagAction" method="{1}">
+          <result name="addToCartOk" type="redirect">/cart/cart_list.jsp</result>
+          <result name="deleteFromCartOk" type="redirect">/cart/cart_list.jsp</result>
+          <result name="returnToCartOk" type="redirect">/cart/cart_list.jsp</result>
+          <result name="changeCartOk" type="redirect">/cart/cart_list.jsp</result>
+          <result name="returnCartJsp" type="redirect">/cart/cart_list.jsp</result>
+          <result name="returnKongJsp" type="redirect">/cart/cartKong.jsp</result>
+       </action>
+     </package>
+     
+     <package name="order" extends="struts-default" namespace="/order">
+        <action name="order_*" class="clf.dangdang.action.OrderMagAction" method="{1}">
+           <result name="toOrderOk">/order/order_info.jsp</result>
+           <result name="toAddressOk">/order/address_form.jsp</result>
+           <result name="toAddressErro">/user/login_form.jsp</result>
+        </action>
+     </package>
+     
+     <package name="address" extends="struts-default" namespace="/address">
+        <action name="address_*" class="clf.dangdang.action.AddressAction" method="{1}">
+          <result name="addAddressOk">/order/order_ok.jsp</result>
+          <result name="updateAddressOk">/order/order_info.jsp</result>
+        </action>
+     </package>
+
+</struts>

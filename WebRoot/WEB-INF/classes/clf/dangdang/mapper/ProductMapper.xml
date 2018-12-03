@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+
+<mapper namespace="clf.dangdang.dao.ProductDao">
+  
+   <sql id="SelectFromProdcutAndProductType">
+     select p.*
+     from Product p
+      
+   </sql>
+   <select id="querryByIf" resultType="Product">
+      <include refid="SelectFromProdcutAndProductType"/>
+      <trim prefix="Order by">
+         <if test="product.status != null">
+             status
+         </if>
+         <if test="product.mounts != null">
+             mounts
+         </if>
+         <if test="product.putaway != null">
+             putaway
+         </if>
+      </trim>
+      limit 0,#{a}  
+   </select>
+   <select id="querryById" resultType="Product">  
+      select * from Product where id=#{id}
+   </select>
+</mapper>

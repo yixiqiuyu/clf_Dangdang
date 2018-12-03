@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "../mybatis-3-config.dtd" >
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+     <typeAliases>
+       <typeAlias type="clf.dangdang.entity.User" alias="User"/>
+       <typeAlias type="clf.dangdang.entity.ProductType" alias="ProductType"/>
+       <typeAlias type="clf.dangdang.entity.Product" alias="Product"/>
+       <typeAlias type="clf.dangdang.entity.ShoppingAddress" alias="SAddress"/>
+       <typeAlias type="clf.dangdang.entity.Order" alias="UserOrder"/>
+     </typeAliases>
+     
+     <environments default="mysql">
+         <environment id="mysql">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+              <property name="driver" value="com.mysql.jdbc.Driver"/>
+              <property name="url" value="jdbc:mysql://localhost:3306/test"/>
+              <property name="username" value="root"/>
+              <property name="password" value="123456"/>
+            </dataSource>
+         </environment>
+     </environments>
+     
+     <mappers>
+        <mapper  resource="clf//dangdang//mapper//UserMapper.xml"/>
+        <mapper resource="clf//dangdang//mapper//ProductTypeMapper.xml"/>
+        <mapper resource="clf//dangdang//mapper//ProductMapper.xml"/>
+        <mapper resource="clf//dangdang//mapper//ShoppingAddressMapper.xml"/>
+        <mapper resource="clf//dangdang//mapper//OrderMapper.xml"/>
+     </mappers>
+     
+
+</configuration>
+
+

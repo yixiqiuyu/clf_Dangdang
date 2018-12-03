@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+
+<mapper namespace="clf.dangdang.dao.AddressDao">
+   <insert id="addAddress">
+      insert into ShoppingAddress (name,address,addressCode,telphone,phone,defaultAddress,address_status,user_id)
+      values(#{name},#{address},#{addressCode},#{telphone},#{phone},#{defaultAddress},#{addressStatus},#{user.id})
+   </insert>
+   <update id="updateAddress">
+      update ShoppingAddress
+      <trim prefix="set" suffixOverrides=",">
+         <if test="name !=null">
+            name=#{name},
+         </if>
+         <if test="address !=null">
+            address=#{address},
+         </if>
+         <if test="addressCode !=null">
+            addressCode=#{addressCode},
+         </if>
+         <if test="telphone !=null">
+            telphone=#{telphone},
+         </if>
+         <if test="phone !=null">
+            phone=#{phone},
+         </if>
+         <if test="defaultAddress !=null">
+            defaultAddress=#{defaultAddress},
+         </if>
+         <if test="addressStatus !=null">
+            address_status=#{addressStatus}
+         </if>
+      </trim>
+   </update>
+</mapper>

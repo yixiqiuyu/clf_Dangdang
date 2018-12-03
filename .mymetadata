@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="clf_Dangdang"
+  id="myeclipse.1462799608320"
+  context-root="/clf_Dangdang"
+  j2ee-spec="5.0"
+  archive="clf_Dangdang.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

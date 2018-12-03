@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+
+<mapper namespace="clf.dangdang.dao.ProductTypeDao">
+  <resultMap id="typeResultMap" type="ProductType" >
+     <id property="id" column="p_id"></id>
+     <result property="typeName" column="p_typeName"></result>
+     <result property="mount" column="p_mount"></result>
+     <collection property="types" ofType="ProductType">
+       <id property="id" column="t_id"/>
+       <result property="typeName" column="t_typeName"/>
+       <result property="parentId" column="t_parentId"/>
+       <result property="mount" column="t_mount"/>
+     </collection>
+  </resultMap>
+  
+  <resultMap id="productResultMap" type="ProductType" >
+     <id property="id" column="t_id"/>
+     <result property="typeName" column="t_typeName"/>
+     <result property="parentId" column="t_parentid"/>
+     <result property="mount" column="t_mount"/>
+     <collection property="products" ofType="Product">
+        <id property="id" column="id"></id>
+        <result property="picLujing" column="piclujing"></result>
+        <result property="name" column="name"></result>
+        <result property="autor" column="autor"></result>
+        <result property="oldprice" column="oldprice"></result>
+        <result property="dangdangprice" column="dangdangprice"></result>
+        <result property="bookstatus" column="bookstatus"></result>
+        <result property="mounts" column="mounts"></result>
+        <result property="status" column="status"></result>
+     </collection>
+  </resultMap>
+   <sql id="SelectFromProdcutAndProductType">
+     select p.*,t.id as t_id,t.typename as t_typename,t.parent_id as t_parentId,t.mount as t_mount
+     from Product p
+     inner join ProductType t
+     on p.ProductType_id = t.id    
+   </sql>
+   <select id="querryTypeByParentIdAndSecondId" resultMap="productResultMap">
+      <include refid="SelectFromProdcutAndProductType"/>
+      <trim prefix="where" suffixOverrides="and">
+          <if test="parentid != null">
+           t.parent_id=#{parentid} and
+          </if>
+          <if test="secondid != null">
+           t.id=#{secondid}
+          </if>
+      </trim>
+      limit #{page.firstIndex},#{page.pageCounts}
+   </select>  
+   
+   <select id="querryAllType" resultMap="typeResultMap">
+      select p.id as p_id,p.typename as p_typename,p.mount as p_mount,t.id as t_id,t.typename as t_typename,t.parent_id as t_parentId,t.mount as t_mount
+      from ProductType p
+      inner join ProductType t
+      on p.id = t.parent_id
+   </select>
+   
+   <select id="querryTypeByFirstIdAndSecondId" resultMap="typeResultMap">
+      select p.id as p_id,p.typename as p_typename,p.mount as p_mount,t.id as t_id,t.typename as t_typename,t.mount as t_mount
+      from ProductType p
+      inner join ProductType t
+      on p.id = t.parent_id
+      <trim prefix="where" suffixOverrides="and">
+          <if test="firstid != null">
+           p.id=#{firstid} and
+          </if>
+          <if test="secondid != null">
+           t.id=#{secondid}
+          </if>
+      </trim>
+   </select>
+   
+   <select id="querryCounts" resultType="Long">
+      select count(*)
+      from Product p
+      inner join ProductType t
+      on p.ProductType_id = t.id 
+       <trim prefix="where" suffixOverrides="and">
+          <if test="parentid != null">
+           t.parent_id=#{parentid} and
+          </if>
+          <if test="secondid != null">
+           t.id=#{secondid}
+          </if>
+      </trim>
+   </select>    
+   
+</mapper>

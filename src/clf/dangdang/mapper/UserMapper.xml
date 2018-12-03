@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+
+<mapper namespace="clf.dangdang.dao.UserDao">
+ 
+   <select id="querryByEmailAndPassword" resultType="User">
+      select * from User where password=#{password} and email=#{email}
+   </select>
+   
+   <insert id="addUser">
+      insert into User (email,password,nikename,registTime,status) values(#{email},#{password},#{nikename},#{registTime},#{status})
+   </insert>
+   <update id="updateUser">
+      update User
+      <trim prefix="set" suffixOverrides=",">
+         <if test="status != null">
+             status=#{status}
+         </if>
+         where email=#{email}
+      </trim>  
+   </update>
+   
+</mapper>

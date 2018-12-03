@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+
+<mapper namespace="clf.dangdang.dao.OrderDao">
+   <insert id="addOrder">
+     insert into UserOrder (order_number,totalprice,order_time,order_status,User_id,Address_id)
+     values(#{orderNumber},#{totalprice},#{orderTime},#{orderStatus},#{user.id},#{address.id})
+   </insert>
+</mapper>
